@@ -16,11 +16,11 @@ class Game:
                 return True
         return False
 
-    def randomise_number(self):
+    def __randomise_number(self):
         random.seed()
         self.hidden_number = random.randint(self.range_from, self.range_to)
 
-    def get_answer(self) -> int:
+    def __get_answer(self) -> int:
         try:
             user_answer = int(input(r"Введите число: "))
             if user_answer <= self.range_to:
@@ -29,12 +29,12 @@ class Game:
         except:
             print(f"Введенная строка не является целым числом от {self.range_from} до {self.range_to}. "
                   f"Попробуйте угадать снова.")
-        return self.get_answer()
+        return self.__get_answer()
 
     def start(self):
-        self.randomise_number()
+        self.__randomise_number()
         print(f"Загадано целое число от {self.range_from} до {self.range_to}, попробуйте угадать.")
-        self.user_number = self.get_answer()
+        self.user_number = self.__get_answer()
         while self.user_number != self.hidden_number:
             if self.user_number < self.hidden_number:
                 print(f"Введенное число {self.user_number} меньше загаданного числа "
@@ -42,7 +42,7 @@ class Game:
             else:
                 print(f"Введенное число {self.user_number} больше загаданного числа "
                       f"от {self.range_from} до {self.range_to}, попробуйте угадать снова.")
-            self.user_number = self.get_answer()
+            self.user_number = self.__get_answer()
         print(f"Было загадано число {self.hidden_number}. Вы победили. Попробовать снова?")
         if input(r"Да/Нет: ") == 'Да':
             self.start()
