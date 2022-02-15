@@ -26,7 +26,9 @@ class Game:
             if user_answer <= self.range_to:
                 if user_answer >= self.range_from:
                     return user_answer
-        except:
+            print(f"Введенная строка не является целым числом от {self.range_from} до {self.range_to}. "
+                  f"Попробуйте угадать снова.")
+        except ValueError:
             print(f"Введенная строка не является целым числом от {self.range_from} до {self.range_to}. "
                   f"Попробуйте угадать снова.")
         return self.__get_answer()
