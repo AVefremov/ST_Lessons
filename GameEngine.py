@@ -35,11 +35,15 @@ class PlayerVsGame(BaseGame):
     def get_answer(self):
         while True:
             answer = input(r"Введите целое число от 1 до 10: ")
-            if not answer.isnumeric():
+            # if not answer.isnumeric():
+            #     continue
+            # if answer > 10 or answer < 1:
+            #     continue
+            try:
+                assert answer <= 10 or answer >= 1
+            except TypeError or AssertionError:
                 continue
             answer = int(answer)
-            if answer > 10 or answer < 1:
-                continue
             if answer < self.hidden_number:
                 result = 'Less'
                 break
@@ -76,7 +80,12 @@ class GameVsPlayer(BaseGame):
             case _:
                 print(r"Ответ не является одним из трех допустимых вариантов: <, > или =.")
                 result = self.get_answer()
-        if self.range_start > self.range_end:
+        # if self.range_start > self.range_end:
+        #     self.range_start = self.range_end
+        #     result = 'Win'
+        try:
+            assert self.range_start <= self.range_end
+        except AssertionError:
             self.range_start = self.range_end
             result = 'Win'
         self.hidden_number = randint(self.range_start, self.range_end)
