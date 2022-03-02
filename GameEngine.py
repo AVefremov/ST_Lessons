@@ -37,13 +37,17 @@ class PlayerVsGame(BaseGame):
             answer = input(r"Введите целое число от 1 до 10: ")
             # if not answer.isnumeric():
             #     continue
+            try:
+                answer = int(answer)
+            except TypeError:
+                continue
             # if answer > 10 or answer < 1:
             #     continue
             try:
-                assert answer <= 10 or answer >= 1
-            except TypeError or AssertionError:
+                assert answer <= 10
+                assert answer >= 1
+            except AssertionError:
                 continue
-            answer = int(answer)
             if answer < self.hidden_number:
                 result = 'Less'
                 break
